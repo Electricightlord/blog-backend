@@ -1,0 +1,42 @@
+version: "3"
+services:
+  blog:
+    build:
+      dockerfile: Dockerfile
+      context: ./java/
+    image: blog:1.0
+    container_name: blog
+    ports:
+      - ${HOST_PORT}:8080
+    environment:
+      PRIVATE_TOKEN: ${PRIVATE_TOKEN}
+      HOOK_TOKEN: ${HOOK_TOKEN}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_ROOT: ${MYSQL_ROOT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - /Users/lihao/blog/blog/log:/log
+      - /Users/lihao/blog/image:/image
+
+  mysql:
+    build:
+      dockerfile: Dockerfile
+      context: ./mysql/
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - /Users/lihao/blog/mysql:/var/lib/mysql
+
+  front:
+    build:
+      dockerfile: Dockerfile
+      context: ./front/
+    image: front:1.0
+    container_name: front
+    ports:
+      - 80:80
+    volumes:
+      - /Users/lihao/blog/image:/www/build/image

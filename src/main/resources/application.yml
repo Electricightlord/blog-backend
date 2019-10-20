@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${MYSQL_ROOT:root}
+    password: ${MYSQL_ROOT_PASSWORD:123456}
+  jackson:
+    time-zone: GMT+8
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+contacts:
+  list:
+    - iconUrl: http://47.95.215.144/static/github.jpeg
+      url: https://github.com/Electricightlord
+    - iconUrl: http://47.95.215.144/static/juejin.jpeg
+      url: https://juejin.im/user/5b6c15ed6fb9a04fc436ed99
+
+gitlab:
+  url: https://gitlab.com/
+  privateToken: ${PRIVATE_TOKEN:fqJBmaxzWWNHC4k_2y6r}
+  hookToken: ${HOOK_TOKEN:asdfghjklzxcvbnm}
+
+log:
+  path: log
+logging:
+  config: classpath:logback-spring.xml
